@@ -46,7 +46,7 @@ jobs:
       id: auto_release
       with:
         repo_token: "${{ secrets.GITHUB_TOKEN }}"
-        title: NPWD QB Services App | ${{ steps.get_tag.outputs.VERSION_TAG }}
+        title: NPWD QB Mail App | ${{ steps.get_tag.outputs.VERSION_TAG }}
         prerelease: false
         files: npwd_qb_mail.zip
 

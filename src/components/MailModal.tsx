@@ -4,7 +4,7 @@ import { Button, Slide, Paper, Typography, Container, Box, Divider } from '@mui/
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import useStyles from '../styles/modal.styles';
 import { dateString } from '../utils/misc';
-import { useMailAPI } from '../hooks/useMailApi';
+import { useMailAPI } from '../hooks/useMailAPI';
 
 const MailModal = () => {
   const classes = useStyles();

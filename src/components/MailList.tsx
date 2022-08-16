@@ -4,7 +4,7 @@ import { useMailsValue, useSetSelectedMail, useSetModalVisible } from '../atoms/
 import makeStyles from '@mui/styles/makeStyles';
 import { Theme } from '@mui/material/styles';
 import { Mail } from '../types/mail';
-import { useMailAPI } from '../hooks/useMailApi';
+import { useMailAPI } from '../hooks/useMailAPI';
 import { useNuiEvent } from 'react-fivem-hooks';
 import { useMailActions } from '../hooks/useMailActions';
 
