@@ -37,5 +37,7 @@ end)
 
 RegisterNetEvent('npwd:qb-mail:newMail', function(data)
 	QBCore.Functions.Notify('New mail, check your phone') --replace with notifications on phone
+	exports.npwd:sendUIMessage('npwd:qb-mail:newMail', {data})
 end)
+
 

@@ -1,10 +1,12 @@
-import React from 'react';
-import { Box, Button, List, ListItem, ListItemText, Typography } from '@mui/material';
+import React, { useEffect } from 'react';
+import { Box, List, ListItem, Typography } from '@mui/material';
 import { useMailsValue, useSetSelectedMail, useSetModalVisible } from '../atoms/mail-atoms';
 import makeStyles from '@mui/styles/makeStyles';
 import { Theme } from '@mui/material/styles';
 import { Mail } from '../types/mail';
 import { useMailAPI } from '../hooks/useMailApi';
+import { useNuiEvent } from 'react-fivem-hooks';
+import { useMailActions } from '../hooks/useMailActions';
 
 const useStyles = makeStyles((theme: Theme) => ({
   noMail: {
@@ -18,6 +20,15 @@ const MailList = ({isDarkMode}: {isDarkMode: boolean}) => {
   const setMail = useSetSelectedMail();
   const setModalVisible = useSetModalVisible();
   const { updateRead } = useMailAPI();
+  const { newMail } = useMailActions();
+
+  const { data } = useNuiEvent<Mail>({ event: "npwd:qb-mail:newMail" });
+
+  useEffect(() => {
+    if (data) {
+      newMail(data);
+    }
+  } , [data])
 
 
   const handleMailModal = (mail: Mail) => {

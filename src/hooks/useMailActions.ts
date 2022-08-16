@@ -1,10 +1,12 @@
 import { useSetMail } from '../atoms/mail-atoms'
 import { useCallback } from 'react';
+import { Mail } from '../types/mail';
 
 interface UseMailActionsValue {
   updateReadState: (id: number) => void;
   deleteLocalMail: (id: number) => void;
   updateLocalButton: (id: number) => void;
+  newMail: (mail: Mail) => void;
 }
 
 export const useMailActions = (): UseMailActionsValue => {
@@ -26,6 +28,16 @@ export const useMailActions = (): UseMailActionsValue => {
     [setMail],
   )
 
+  const newMail = useCallback(
+    (mail: Mail) => {
+      setMail((curMail) => {
+        const newMail = [...curMail, mail];
+        return newMail;
+      });
+    },
+    [setMail],
+  );
+
   const updateLocalButton = useCallback(
     (id) => {
       setMail((curMail) => {
@@ -45,5 +57,5 @@ export const useMailActions = (): UseMailActionsValue => {
     [setMail],
   );
 
-  return { updateReadState, deleteLocalMail, updateLocalButton };
+  return { updateReadState, deleteLocalMail, updateLocalButton, newMail };
 };
