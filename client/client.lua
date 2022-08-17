@@ -24,7 +24,7 @@ RegisterNUICallback("npwd:qb-mail:deleteMail", function(data, cb)
 end)
 
 RegisterNUICallback("npwd:qb-mail:updateButton", function(data, cb)
-	TriggerEvent('qb-drugs:client:setLocation', data.button.buttonData)
+	TriggerEvent(data.button.buttonEvent, data.button.buttonData)
 	TriggerServerEvent("npwd:qb-mail:updateButton", data.mailid)
 	RegisterNetEvent("npwd:qb-mail:buttonUpdated", function(result)
 		if result then
