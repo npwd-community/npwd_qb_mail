@@ -2,13 +2,11 @@ import React from 'react';
 import { useModalVisible, useSelectedMail } from '../atoms/mail-atoms';
 import { Button, Slide, Paper, Typography, Container, Box, Divider } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import useStyles from '../styles/modal.styles';
 import { dateString } from '../utils/misc';
 import { useMailAPI } from '../hooks/useMailAPI';
 import xss from 'xss';
 
 const MailModal = () => {
-  const classes = useStyles();
   const [modalVisible, setModalVisible] = useModalVisible();
   const [selectedMail, setselectedMail] = useSelectedMail();
   const { deleteMail, updateMailButton } = useMailAPI();
@@ -53,7 +51,15 @@ const MailModal = () => {
       unmountOnExit
       onExited={handleClearContent}
     >
-      <Paper className={classes.modalRoot} square>
+      <Paper
+        sx={{
+          position: 'absolute',
+          zIndex: 20,
+          height: '100%',
+          width: '100%',
+        }}
+        square
+      >
         <Container sx={{ height: '100%' }}>
           <Box sx={{ height: '100%' }}>
             <Box pt={2} pb={1}>

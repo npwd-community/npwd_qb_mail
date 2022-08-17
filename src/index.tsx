@@ -11,7 +11,6 @@ import { IPhoneSettings } from '@project-error/npwd-types';
 import i18next from 'i18next';
 import { createTheme } from '@mui/material';
 
-
 const Container = styled.div`
   position: relative;
   width: 500px;
@@ -71,14 +70,14 @@ const Root = () => {
 
   return (
     <BrowserRouter>
-        <NuiProvider>
-            <Container>
-              <Background src={image} />
-              <AppContainer>
-                <App settings={settings} i18n={i18next} theme={theme} />
-              </AppContainer>
-            </Container>
-        </NuiProvider>
+      <NuiProvider>
+        <Container>
+          <Background src={image} />
+          <AppContainer>
+              <App settings={settings} i18n={i18next} theme={theme} />
+          </AppContainer>
+        </Container>
+      </NuiProvider>
     </BrowserRouter>
   );
 };
