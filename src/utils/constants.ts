@@ -8,7 +8,7 @@ export const MockMail: Mail[] = [
     message:
       'Here is all info about the delivery, <br><br>Items: <br> 1x Weed Brick<br><br> Be on time!!',
     read: 0,
-    date: 1660677787,
+    date: 1660745412000,
     button: {
       buttonEvent: 'qb-drugs:client:setLocation',
       enabled: true,

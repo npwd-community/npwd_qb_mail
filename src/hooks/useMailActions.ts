@@ -31,7 +31,7 @@ export const useMailActions = (): UseMailActionsValue => {
   const newMail = useCallback(
     (mail: Mail) => {
       setMail((curMail) => {
-        const newMail = [...curMail, mail];
+        const newMail = [mail, ...curMail];
         return newMail;
       });
     },

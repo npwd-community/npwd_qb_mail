@@ -22,11 +22,11 @@ const MailList = ({isDarkMode}: {isDarkMode: boolean}) => {
   const { updateRead } = useMailAPI();
   const { newMail } = useMailActions();
 
-  const { data } = useNuiEvent<Mail>({ event: "npwd:qb-mail:newMail" });
+  const { data } = useNuiEvent<Mail[]>({ event: "npwd:qb-mail:newMail" });
 
   useEffect(() => {
     if (data) {
-      newMail(data);
+      newMail(data[0]);
     }
   } , [data])
 
