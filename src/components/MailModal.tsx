@@ -5,6 +5,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import useStyles from '../styles/modal.styles';
 import { dateString } from '../utils/misc';
 import { useMailAPI } from '../hooks/useMailAPI';
+import xss from 'xss';
 
 const MailModal = () => {
   const classes = useStyles();
@@ -37,6 +38,12 @@ const MailModal = () => {
   const handleClearContent = () => {
     setselectedMail(null);
   };
+
+  const sanitizedMessage = xss(selectedMail.message, {
+    whiteList: {
+      br: [],
+    },
+  });
 
   return (
     <Slide
@@ -76,8 +83,8 @@ const MailModal = () => {
                 pl={1}
                 pt={'12px'}
                 sx={{ fontSize: '18px', height: '70%' }}
-                dangerouslySetInnerHTML={{ __html: selectedMail.message }}
-              ></Box>
+                dangerouslySetInnerHTML={{ __html: sanitizedMessage }}
+              />
             )}
             <Box
               display="inline"
