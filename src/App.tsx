@@ -8,6 +8,8 @@ import MailList from './components/MailList';
 import { RecoilRoot } from 'recoil';
 import MailModal from './components/MailModal';
 import Header from './components/Header';
+import { PhoneSnackbar } from './snackbar/PhoneSnackbar';
+import SnackbarProvider from './snackbar/SnackbarProvider';
 
 const Container = styled.div<{ isDarkMode: any }>`
   flex: 1;
@@ -34,8 +36,10 @@ const App = (props: AppProps) => {
 
   return (
     <RecoilRoot>
+      <SnackbarProvider>
         <StyledEngineProvider injectFirst>
           <ThemeProvider theme={props.theme}>
+            <PhoneSnackbar />
             <Container isDarkMode={isDarkMode}>
               <Header />
               <MailModal />
@@ -43,6 +47,7 @@ const App = (props: AppProps) => {
             </Container>
           </ThemeProvider>
         </StyledEngineProvider>
+      </SnackbarProvider>
     </RecoilRoot>
   );
 };
