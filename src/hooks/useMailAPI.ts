@@ -1,4 +1,5 @@
 import { useCallback } from 'react';
+import { useSnackbar } from '../snackbar/useSnackbar';
 import { useMailActions } from './useMailActions';
 import { ServerPromiseResp } from '../types/common';
 import fetchNui from '../utils/fetchNui';
@@ -16,6 +17,7 @@ interface MailAPIValue {
 }
 
 export const useMailAPI = (): MailAPIValue => {
+  const { addAlert } = useSnackbar();
   const { updateReadState, deleteLocalMail, updateLocalButton } = useMailActions();
 
   const updateRead = useCallback(
@@ -31,21 +33,20 @@ export const useMailAPI = (): MailAPIValue => {
       const resp = await fetchNui<ServerPromiseResp>("npwd:qb-mail:deleteMail", mailid);
 
       if (resp.status !== 'ok') {
-        // return addAlert({
-        //   message: 'Failed to delete mail',
-        //   type: 'error',
-        // });
-        console.log('Failed to delete mail');
+        return addAlert({
+          message: 'Failed to delete mail',
+          type: 'error',
+        });
       }
 
       deleteLocalMail(mailid);
 
-      // addAlert({
-      //   message: 'Successfully deleted mail',
-      //   type: 'success',
-      // });
+      addAlert({
+        message: 'Successfully deleted mail',
+        type: 'success',
+      });
     },
-    [deleteLocalMail],
+    [addAlert, deleteLocalMail],
   );
 
   const updateMailButton = useCallback(
@@ -55,20 +56,19 @@ export const useMailAPI = (): MailAPIValue => {
         button,
       });
       if (resp.status !== 'ok') {
-        // return addAlert({
-        //   message: 'Failed to accept mail',
-        //   type: 'error',
-        // });
-        console.log('Failed to accept mail');
+        return addAlert({
+          message: 'Failed to accept mail',
+          type: 'error',
+        });
       }
       updateLocalButton(mailid);
 
-      // addAlert({
-      //   message: 'Successfully accepted mail',
-      //   type: 'success',
-      // });
+      addAlert({
+        message: 'Successfully accepted mail',
+        type: 'success',
+      });
     },
-    [updateLocalButton],
+    [addAlert, updateLocalButton],
   );
 
 
