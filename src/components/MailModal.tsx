@@ -40,6 +40,7 @@ const MailModal = () => {
   const sanitizedMessage = xss(selectedMail.message, {
     whiteList: {
       br: [],
+      strong: [],
     },
   });
 
