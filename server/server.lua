@@ -61,7 +61,7 @@ RegisterNetEvent('qb-phone:server:sendNewMail', function(mailData)
 		mailid = mailid,
 		button = mailData.button,
 		read = 0,
-		date = os.time(os.date("!*t")) * 1000
+		date = os.time() * 1000
 	}
 	TriggerClientEvent('npwd:qb-mail:newMail', src, newMail)
 end)
@@ -83,7 +83,7 @@ RegisterNetEvent('qb-phone:server:sendNewMailToOffline', function(citizenid, mai
 			mailid = mailid,
 			button = mailData.button,
 			read = 0,
-			date = os.time(os.date("!*t"))
+			date = os.time() * 1000
 		}
 		TriggerClientEvent('npwd:qb-mail:newMail', src, newMail)
     else
