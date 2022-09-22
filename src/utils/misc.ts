@@ -17,6 +17,16 @@ export const buildRespObj = (
   errorMsg,
 });
 
+const DayFormatting = [
+  'Sunday',
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
+]
+
 const MonthFormatting = [
   'January',
   'February',
@@ -35,9 +45,11 @@ const MonthFormatting = [
 export const dateString = (mailDate: number) => {
   const date = new Date(mailDate);
   return (
-    date.getDay() +
-    ' ' +
+    DayFormatting[date.getDay()] +
+    ', ' +
     MonthFormatting[date.getMonth()] +
+    ' ' +
+    ('0' + date.getDate()).slice(-2) +
     ' ' +
     date.getFullYear() +
     ' ' +
