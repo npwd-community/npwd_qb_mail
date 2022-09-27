@@ -6,7 +6,6 @@ RegisterNetEvent("npwd:qb-mail:getMail", function()
 	local mailResults = MySQL.query.await('SELECT `citizenid`, `sender`, `subject`, `message`, `read`, `mailid`, `date`, `button` FROM player_mails WHERE citizenid = ? ORDER BY date DESC', {Player.PlayerData.citizenid})
 	
 	for i = 1, #mailResults do
-		mailResults[i].message = mailResults[i].message:gsub("<script>[^</script>^<script>]+</script>", "")
 		if mailResults[i].button ~= nil and #mailResults[i].button == 2 then -- qb-phone used replace button with "" when its used, so checking if thats the length then setting to nil for ui
 			mailResults[i].button = nil
 		end
