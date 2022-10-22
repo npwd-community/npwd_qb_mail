@@ -36,8 +36,13 @@ RegisterNUICallback("npwd:qb-mail:updateButton", function(data, cb)
 end)
 
 RegisterNetEvent('npwd:qb-mail:newMail', function(data)
-	QBCore.Functions.Notify('New mail, check your phone') --replace with notifications on phone
 	exports.npwd:sendUIMessage({type = "npwd:qb-mail:newMail", payload = {data}})
+	exports["npwd"]:createNotification({
+		notisId = "npwd:newmail",
+		appId = "mail",
+		content = Lang:t('newmail'),
+		keepOpen = false,
+		duration = 5000,
+		path = "/mail",
+	})
 end)
-
-
