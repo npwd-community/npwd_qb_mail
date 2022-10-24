@@ -3,6 +3,11 @@ game "gta5"
 
 client_script 'client/client.lua'
 
+shared_scripts {
+    '@qb-core/shared/locale.lua',
+    'locales/*.lua',
+}
+
 server_script {
     'server/server.lua',
     '@oxmysql/lib/MySQL.lua',
