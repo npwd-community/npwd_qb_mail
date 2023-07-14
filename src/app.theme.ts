@@ -18,5 +18,10 @@ export const theme: ThemeOptions = {
       light: orange[500],
       contrastText: MAIL_APP_TEXT_COLOR,
     },
+    error: {
+      main: red[600],
+      dark: red[900],
+      light: red[500],
+    }
   },
 };
