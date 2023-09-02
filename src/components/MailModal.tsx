@@ -89,7 +89,7 @@ const MailModal = () => {
               <Box
                 pl={1}
                 pt={'12px'}
-                sx={{ fontSize: '18px', height: '70%' }}
+                sx={{ fontSize: '18px', maxHeight: '70%', overflow: "auto" }}
                 dangerouslySetInnerHTML={{ __html: sanitizedMessage }}
               />
             )}
