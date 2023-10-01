@@ -1,15 +1,18 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import '../npwd.config';
+import React from "react";
+import ReactDOM from "react-dom";
+import "../npwd.config";
 
-import { BrowserRouter } from 'react-router-dom';
-import styled from 'styled-components';
-import App from './App';
-import image from './bg.png';
-import { NuiProvider } from 'react-fivem-hooks';
-import { IPhoneSettings } from '@project-error/npwd-types';
-import i18next from 'i18next';
-import { createTheme } from '@mui/material';
+import { BrowserRouter, HashRouter } from "react-router-dom";
+import styled from "styled-components";
+import App from "./App";
+import image from "./bg.png";
+import { NuiProvider } from "react-fivem-hooks";
+import { IPhoneSettings } from "@project-error/npwd-types";
+import i18next from "i18next";
+import { createTheme } from "@mui/material";
+import { RecoilEnv } from "recoil";
+
+RecoilEnv.RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED = false;
 
 const Container = styled.div`
   position: relative;
@@ -43,18 +46,18 @@ const AppContainer = styled.div`
 // Default settings will come from package. This is for development purposes.
 const settings = {
   language: {
-    label: 'English',
-    value: 'en',
+    label: "English",
+    value: "en",
   },
   theme: {
-    label: 'Theme name',
-    value: 'theme-name',
+    label: "Theme name",
+    value: "theme-name",
   },
 } as IPhoneSettings;
 
 const theme = createTheme({
   palette: {
-    mode: 'light',
+    mode: "light",
   },
 });
 
@@ -64,24 +67,24 @@ const theme = createTheme({
  */
 
 const Root = () => {
-  if (process.env.NODE_ENV === 'production' || process.env.REACT_APP_IN_GAME) {
+  if (process.env.NODE_ENV === "production" || process.env.REACT_APP_IN_GAME) {
     return null;
   }
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <React.Suspense fallback="Loading dev env">
         <NuiProvider>
           <Container>
             <Background src={image} />
             <AppContainer>
-                <App settings={settings} i18n={i18next} theme={theme} />
+              <App settings={settings} i18n={i18next} theme={theme} />
             </AppContainer>
           </Container>
         </NuiProvider>
       </React.Suspense>
-    </BrowserRouter>
+    </HashRouter>
   );
 };
 
-ReactDOM.render(<Root />, document.getElementById('root'));
+ReactDOM.render(<Root />, document.getElementById("root"));

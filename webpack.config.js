@@ -1,26 +1,25 @@
-const path = require('path');
-const webpack = require('webpack');
+const path = require("path");
+const webpack = require("webpack");
 const { ModuleFederationPlugin } = webpack.container;
-const deps = require('./package.json').dependencies;
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const packageJson = require("./package.json");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { dependencies, name } = packageJson;
 
 // HMR
-const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
-const ReactRefreshTypeScript = require('react-refresh-typescript');
-const isDevelopment = process.env.NODE_ENV === 'development';
+const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
+const ReactRefreshTypeScript = require("react-refresh-typescript");
+const isDevelopment = process.env.NODE_ENV === "development";
 
 /* TODO: Fix for real */
 /* Probably bad way of fixing this */
-delete deps['@emotion/react'];
-delete deps['@emotion/styled'];
-delete deps['@mui/material'];
-delete deps['@mui/styles'];
-delete deps['@mui/icons-material'];
+delete dependencies["@emotion/styled"];
+delete dependencies["@mui/material"];
+delete dependencies["@mui/styles"];
 
 module.exports = {
-  entry: './src/bootstrap.ts',
-  mode: isDevelopment ? 'development' : 'production',
-  devtool: 'inline-source-map',
+  entry: "./src/bootstrap.ts",
+  mode: isDevelopment ? "development" : "production",
+  devtool: "inline-source-map",
   module: {
     rules: [
       {
@@ -28,10 +27,12 @@ module.exports = {
         exclude: /node_modules/,
         use: [
           {
-            loader: require.resolve('ts-loader'),
+            loader: require.resolve("ts-loader"),
             options: {
               getCustomTransformers: () => ({
-                before: [isDevelopment && ReactRefreshTypeScript()].filter(Boolean),
+                before: [isDevelopment && ReactRefreshTypeScript()].filter(
+                  Boolean
+                ),
               }),
               transpileOnly: isDevelopment,
             },
@@ -43,45 +44,49 @@ module.exports = {
         exclude: /node_modules/,
         use: [
           {
-            loader: 'file-loader',
+            loader: "file-loader",
           },
         ],
       },
     ],
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
+    extensions: [".tsx", ".ts", ".js"],
   },
   output: {
-    path: path.resolve(__dirname, 'web/dist'),
-    publicPath: 'auto',
+    path: path.resolve(__dirname, "web/dist"),
+    publicPath: "auto",
     clean: true,
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: 'npwd_qb_mail',
-      filename: 'remoteEntry.js',
+      name,
+      filename: "remoteEntry.js",
       exposes: {
-        './config': './npwd.config',
+        "./config": "./npwd.config",
       },
       shared: {
-        ...deps,
+        ...dependencies,
         react: {
           singleton: true,
-          requiredVersion: deps.react,
+          requiredVersion: dependencies.react,
         },
-        'react-dom': {
+        "@emotion/react": {
           singleton: true,
-          requiredVersion: deps['react-dom'],
+          requiredVersion: dependencies["@emotion/react"],
+        },
+        "react-dom": {
+          singleton: true,
+          requiredVersion: dependencies["react-dom"],
         },
       },
     }),
     new HtmlWebpackPlugin({
       cache: false,
-      template: './src/index.html',
+      template: "./src/index.html",
     }),
     new webpack.DefinePlugin({
-      process: { env: {} },
+      process: { env: { REACT_APP_IN_GAME: process.env.REACT_APP_IN_GAME } },
     }),
     isDevelopment && new ReactRefreshWebpackPlugin(),
   ].filter(Boolean),
@@ -89,9 +94,10 @@ module.exports = {
   devServer: {
     port: 3002,
     headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
-      'Access-Control-Allow-Headers': 'X-Requested-With, content-type, Authorization',
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
+      "Access-Control-Allow-Headers":
+        "X-Requested-With, content-type, Authorization",
     },
   },
 };

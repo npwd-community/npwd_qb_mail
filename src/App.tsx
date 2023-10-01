@@ -1,15 +1,23 @@
-import React from 'react';
-import { NuiProvider } from 'react-fivem-hooks';
-import styled from 'styled-components';
-import { IPhoneSettings } from '@project-error/npwd-types';
-import { i18n } from 'i18next';
-import { Theme, StyledEngineProvider, ThemeProvider, Typography, Box } from '@mui/material';
-import MailList from './components/MailList';
-import { RecoilRoot } from 'recoil';
-import MailModal from './components/MailModal';
-import Header from './components/Header';
-import { PhoneSnackbar } from './snackbar/PhoneSnackbar';
-import SnackbarProvider from './snackbar/SnackbarProvider';
+import React from "react";
+import { NuiProvider } from "react-fivem-hooks";
+import styled from "styled-components";
+import { IPhoneSettings } from "@project-error/npwd-types";
+import { i18n } from "i18next";
+import {
+  Theme,
+  StyledEngineProvider,
+  ThemeProvider,
+  Typography,
+  Box,
+} from "@mui/material";
+import MailList from "./components/MailList";
+import { RecoilEnv, RecoilRoot } from "recoil";
+import MailModal from "./components/MailModal";
+import Header from "./components/Header";
+import { PhoneSnackbar } from "./snackbar/PhoneSnackbar";
+import SnackbarProvider from "./snackbar/SnackbarProvider";
+
+RecoilEnv.RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED = false;
 
 const Container = styled.div<{ isDarkMode: any }>`
   flex: 1;
@@ -32,7 +40,7 @@ interface AppProps {
 }
 
 const App = (props: AppProps) => {
-  const isDarkMode = props.theme.palette.mode === 'dark';
+  const isDarkMode = props.theme.palette.mode === "dark";
 
   return (
     <RecoilRoot>
