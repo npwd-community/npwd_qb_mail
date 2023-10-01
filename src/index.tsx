@@ -70,14 +70,16 @@ const Root = () => {
 
   return (
     <BrowserRouter>
-      <NuiProvider>
-        <Container>
-          <Background src={image} />
-          <AppContainer>
-              <App settings={settings} i18n={i18next} theme={theme} />
-          </AppContainer>
-        </Container>
-      </NuiProvider>
+      <React.Suspense fallback="Loading dev env">
+        <NuiProvider>
+          <Container>
+            <Background src={image} />
+            <AppContainer>
+                <App settings={settings} i18n={i18next} theme={theme} />
+            </AppContainer>
+          </Container>
+        </NuiProvider>
+      </React.Suspense>
     </BrowserRouter>
   );
 };

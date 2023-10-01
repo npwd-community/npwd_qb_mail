@@ -1,6 +1,6 @@
 import React from 'react';
 import { useModalVisible, useSelectedMail } from '../atoms/mail-atoms';
-import { Button, Slide, Paper, Typography, Container, Box, Divider } from '@mui/material';
+import { Button, Slide, Paper, Typography, Container, Box, Divider, useTheme } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { dateString } from '../utils/misc';
 import { useMailAPI } from '../hooks/useMailAPI';
@@ -10,6 +10,8 @@ const MailModal = () => {
   const [modalVisible, setModalVisible] = useModalVisible();
   const [selectedMail, setselectedMail] = useSelectedMail();
   const { deleteMail, updateMailButton } = useMailAPI();
+  const theme = useTheme();
+  const isDarkMode = theme.palette.mode === 'dark';
 
   if (selectedMail === null) return null;
 
@@ -79,7 +81,7 @@ const MailModal = () => {
               </Typography>
               <Typography sx={{ fontSize: '19px' }}>{selectedMail.subject}</Typography>
               {selectedMail.date && (
-                <Typography sx={{ fontSize: '15px', color: '#dedede' }}>
+                <Typography sx={{ fontSize: '15px', color: isDarkMode ? '#dedede' : '#424242' }}>
                   {dateString(selectedMail.date)}
                 </Typography>
               )}
@@ -103,7 +105,17 @@ const MailModal = () => {
                   ACCEPT
                 </Button>
               )}
-              <Button color="error" variant="contained" onClick={handleDeleteMail}>
+              <Button 
+                color="error" 
+                variant="contained" 
+                onClick={handleDeleteMail}
+                sx={{ 
+                  backgroundColor: `${theme.palette.error.main} !important`,
+                  '&:hover': {
+                    backgroundColor: `${theme.palette.error.dark} !important`,
+                  }
+                 }}
+              >
                 DELETE
               </Button>
             </Box>

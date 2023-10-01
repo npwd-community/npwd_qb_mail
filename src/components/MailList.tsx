@@ -95,7 +95,7 @@ const MailList = ({ isDarkMode }: { isDarkMode: boolean }) => {
                 {mail.sender}
               </Typography>
               <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                <Typography sx={{ color: '#dedede', fontSize: '13px' }}>
+                <Typography sx={{ color: isDarkMode ? '#dedede' : '#424242', fontSize: '13px' }}>
                   {mailDate(mail.date)}
                 </Typography>
               </Box>
