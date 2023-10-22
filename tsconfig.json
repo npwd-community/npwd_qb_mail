@@ -10,5 +10,5 @@
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true
   },
-  "exclude": ["server", "client"]
+  "exclude": ["server", "client", "locales"]
 }
