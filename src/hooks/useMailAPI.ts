@@ -1,9 +1,9 @@
-import { useCallback } from 'react';
-import { useSnackbar } from '../snackbar/useSnackbar';
-import { useMailActions } from './useMailActions';
-import { ServerPromiseResp } from '../types/common';
-import fetchNui from '../utils/fetchNui';
-import { buttonContentInt } from '../types/mail';
+import { useCallback } from "react";
+import { useSnackbar } from "../snackbar/useSnackbar";
+import { useMailActions } from "./useMailActions";
+import { ServerPromiseResp } from "../types/common";
+import fetchNui from "../utils/fetchNui";
+import { buttonContentInt } from "../types/mail";
 
 interface updateMailButtonParams {
   mailid: number;
@@ -18,59 +18,65 @@ interface MailAPIValue {
 
 export const useMailAPI = (): MailAPIValue => {
   const { addAlert } = useSnackbar();
-  const { updateReadState, deleteLocalMail, updateLocalButton } = useMailActions();
+  const { updateReadState, deleteLocalMail, updateLocalButton } =
+    useMailActions();
 
   const updateRead = useCallback(
     async (mailid: number) => {
       await fetchNui<ServerPromiseResp>("npwd:qb-mail:updateRead", mailid);
       updateReadState(mailid);
     },
-    [updateReadState],
+    [updateReadState]
   );
 
   const deleteMail = useCallback(
     async (mailid: number) => {
-      const resp = await fetchNui<ServerPromiseResp>("npwd:qb-mail:deleteMail", mailid);
+      const resp = await fetchNui<ServerPromiseResp>(
+        "npwd:qb-mail:deleteMail",
+        mailid
+      );
 
-      if (resp.status !== 'ok') {
+      if (resp.status !== "ok") {
         return addAlert({
-          message: 'Failed to delete mail',
-          type: 'error',
+          message: "Failed to delete mail",
+          type: "error",
         });
       }
 
       deleteLocalMail(mailid);
 
       addAlert({
-        message: 'Successfully deleted mail',
-        type: 'success',
+        message: "Successfully deleted mail",
+        type: "success",
       });
     },
-    [addAlert, deleteLocalMail],
+    [addAlert, deleteLocalMail]
   );
 
   const updateMailButton = useCallback(
     async ({ mailid, button }: updateMailButtonParams) => {
-      const resp = await fetchNui<ServerPromiseResp>("npwd:qb-mail:updateButton", {
-        mailid,
-        button,
-      });
-      if (resp.status !== 'ok') {
+      const resp = await fetchNui<ServerPromiseResp>(
+        "npwd:qb-mail:updateButton",
+        {
+          mailid,
+          button,
+        }
+      );
+      if (resp.status !== "ok") {
         return addAlert({
-          message: 'Failed to accept mail',
-          type: 'error',
+          message: "Failed to accept mail",
+          type: "error",
         });
       }
       updateLocalButton(mailid);
 
       addAlert({
-        message: 'Successfully accepted mail',
-        type: 'success',
+        message: "Successfully accepted mail",
+        type: "success",
       });
     },
-    [addAlert, updateLocalButton],
+    [addAlert, updateLocalButton]
   );
-
 
   return { updateRead, deleteMail, updateMailButton };
 };
