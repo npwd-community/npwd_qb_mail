@@ -18,9 +18,6 @@ export const mailStates = {
       key: "defaultMailItems",
       get: async () => {
         try {
-          console.log("MODE: ", import.meta.env.MODE);
-          return MockMail;
-
           const resp = await fetchNui<ServerPromiseResp<Mail[]>>(
             "npwd:qb-mail:getMail"
           );

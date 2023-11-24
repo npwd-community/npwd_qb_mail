@@ -41,6 +41,9 @@ export default defineConfig({
     port: 3002,
   },
   build: {
+    outDir: "web/dist",
+    emptyOutDir: true,
     modulePreload: false,
+    assetsDir: ''
   },
 });
