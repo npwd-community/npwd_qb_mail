@@ -1,21 +1,15 @@
 import React from "react";
-import { NuiProvider } from "react-fivem-hooks";
-import styled from "styled-components";
+import styled from "@emotion/styled";
 import { IPhoneSettings } from "@project-error/npwd-types";
 import { i18n } from "i18next";
-import {
-  Theme,
-  StyledEngineProvider,
-  ThemeProvider,
-  Typography,
-  Box,
-} from "@mui/material";
-import MailList from "./components/MailList";
+import { Theme, StyledEngineProvider, ThemeProvider } from "@mui/material";
 import { RecoilEnv, RecoilRoot } from "recoil";
-import MailModal from "./components/MailModal";
 import Header from "./components/Header";
-import { PhoneSnackbar } from "./snackbar/PhoneSnackbar";
 import SnackbarProvider from "./snackbar/SnackbarProvider";
+import { theme } from "./app.theme";
+import MailModal from "./components/MailModal";
+import MailList from "./components/MailList";
+import { NuiProvider } from "fivem-nui-react-lib";
 
 RecoilEnv.RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED = false;
 
@@ -40,30 +34,27 @@ interface AppProps {
 }
 
 const App = (props: AppProps) => {
-  const isDarkMode = props.theme.palette.mode === "dark";
+  const isDarkMode = true;
 
   return (
-    <RecoilRoot>
+    <StyledEngineProvider injectFirst>
       <SnackbarProvider>
-        <StyledEngineProvider injectFirst>
-          <ThemeProvider theme={props.theme}>
-            <PhoneSnackbar />
-            <Container isDarkMode={isDarkMode}>
-              <Header />
-              <MailModal />
-              <MailList isDarkMode={isDarkMode} />
-            </Container>
-          </ThemeProvider>
-        </StyledEngineProvider>
+        <Container isDarkMode={isDarkMode}>
+          <Header />
+          <MailModal />
+          <MailList isDarkMode={true} />
+        </Container>
       </SnackbarProvider>
-    </RecoilRoot>
+    </StyledEngineProvider>
   );
 };
 
-const WithProviders: React.FC<AppProps> = (props) => (
-  <NuiProvider>
-    <App {...props} />
-  </NuiProvider>
-);
-
-export default WithProviders;
+export default function WithProviders(props: AppProps) {
+  return (
+    <RecoilRoot override key="npwd_qb_mail">
+      <NuiProvider resource="npwd_qb_mail">
+        <App {...props} />
+      </NuiProvider>
+    </RecoilRoot>
+  );
+}

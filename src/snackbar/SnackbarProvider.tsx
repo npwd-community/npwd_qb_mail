@@ -1,9 +1,11 @@
-import React, { createContext, useState } from 'react';
-import { IAlert } from './useSnackbar';
+import React, { createContext, useState } from "react";
+import { IAlert } from "./useSnackbar";
 
 export const SnackbarContext = createContext(null);
 
-const SnackbarProvider: React.FC = ({ children }) => {
+const SnackbarProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const [open, setOpen] = useState<boolean>(false);
   const [alert, setAlert] = useState<IAlert>(null);
 
@@ -17,7 +19,9 @@ const SnackbarProvider: React.FC = ({ children }) => {
   };
 
   return (
-    <SnackbarContext.Provider value={{ alert, addAlert: setNewAlert, handleClose, isOpen: open }}>
+    <SnackbarContext.Provider
+      value={{ alert, addAlert: setNewAlert, handleClose, isOpen: open }}
+    >
       {children}
     </SnackbarContext.Provider>
   );

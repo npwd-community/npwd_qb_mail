@@ -2,15 +2,15 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "../npwd.config";
 
-import { BrowserRouter, HashRouter } from "react-router-dom";
-import styled from "styled-components";
+import { HashRouter } from "react-router-dom";
+import styled from "@emotion/styled";
 import App from "./App";
 import image from "./bg.png";
-import { NuiProvider } from "react-fivem-hooks";
+import { NuiProvider } from "fivem-nui-react-lib";
 import { IPhoneSettings } from "@project-error/npwd-types";
 import i18next from "i18next";
 import { createTheme } from "@mui/material";
-import { RecoilEnv } from "recoil";
+import { RecoilEnv, RecoilRoot } from "recoil";
 
 RecoilEnv.RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED = false;
 
@@ -67,22 +67,20 @@ const theme = createTheme({
  */
 
 const Root = () => {
-  if (process.env.NODE_ENV === "production" || process.env.REACT_APP_IN_GAME) {
-    return null;
-  }
-
   return (
     <HashRouter>
-      <React.Suspense fallback="Loading dev env">
-        <NuiProvider>
-          <Container>
-            <Background src={image} />
-            <AppContainer>
-              <App settings={settings} i18n={i18next} theme={theme} />
-            </AppContainer>
-          </Container>
-        </NuiProvider>
-      </React.Suspense>
+      <RecoilRoot>
+        <React.Suspense fallback="Loading dev env">
+          <NuiProvider resource="npwd_qb_mail">
+            <Container>
+              <Background src={image} />
+              <AppContainer>
+                <App settings={settings} i18n={i18next} theme={theme} />
+              </AppContainer>
+            </Container>
+          </NuiProvider>
+        </React.Suspense>
+      </RecoilRoot>
     </HashRouter>
   );
 };
