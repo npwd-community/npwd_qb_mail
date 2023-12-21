@@ -30,7 +30,7 @@
     "dev:browser": "concurrently \"pnpm build:watch --mode dev\" \"pnpm preview:dev\"",
     "build:dev": "vite build --mode dev",
     "build:watch": "vite build --watch",
-    "build:game": "vite build --mode game",
+    "build": "vite build --mode game",
     "preview:dev": "vite preview --mode dev",
     "clean": "rm -rf dist",
     "watch": "concurrently \"yarn watch:client\" \"yarn watch:server\"  \"yarn watch:nui\"",
