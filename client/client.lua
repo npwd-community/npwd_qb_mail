@@ -36,7 +36,8 @@ RegisterNUICallback("npwd:qb-mail:updateButton", function(data, cb)
 end)
 
 RegisterNetEvent('npwd:qb-mail:newMail', function(data)
-	exports.npwd:sendUIMessage({type = "npwd:qb-mail:newMail", payload = {data}})
+	exports.npwd:sendNPWDMessage("MAIL", "newMail", {data})
+
 	exports["npwd"]:createNotification({
 		notisId = "npwd:newmail",
 		appId = "mail",
