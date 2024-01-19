@@ -2,63 +2,62 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "../npwd.config";
 
-import { HashRouter } from "react-router-dom";
+import {HashRouter} from "react-router-dom";
 import styled from "@emotion/styled";
 import App from "./App";
 import image from "./bg.png";
-import { NuiProvider } from "fivem-nui-react-lib";
-import { IPhoneSettings } from "@project-error/npwd-types";
+import {IPhoneSettings} from "@project-error/npwd-types";
 import i18next from "i18next";
-import { createTheme } from "@mui/material";
-import { RecoilEnv, RecoilRoot } from "recoil";
+import {createTheme} from "@mui/material";
+import {RecoilEnv, RecoilRoot} from "recoil";
 
 RecoilEnv.RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED = false;
 
 const Container = styled.div`
-  position: relative;
-  width: 500px;
-  height: 1000px;
+    position: relative;
+    width: 500px;
+    height: 1000px;
 `;
 const Background = styled.div<{ src: string }>`
-  background: url(${({ src }) => src});
-  position: absolute;
-  z-index: 100;
-  width: 500px;
-  height: 1000px;
-  pointer-events: none;
+    background: url(${({src}) => src});
+    position: absolute;
+    z-index: 100;
+    width: 500px;
+    height: 1000px;
+    pointer-events: none;
 `;
 
 const AppContainer = styled.div`
-  z-index: 2;
-  position: absolute;
-  bottom: 100px;
-  left: 50px;
-  right: 50px;
-  top: 100px;
-  display: flex;
-  flex-direction: column;
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  border-radius: 20px;
+    z-index: 2;
+    position: absolute;
+    bottom: 100px;
+    left: 50px;
+    right: 50px;
+    top: 100px;
+    display: flex;
+    flex-direction: column;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 20px;
 `;
 
 // Default settings will come from package. This is for development purposes.
 const settings = {
-  language: {
-    label: "English",
-    value: "en",
-  },
-  theme: {
-    label: "Theme name",
-    value: "theme-name",
-  },
+    language: {
+        label: "English",
+        value: "en",
+    },
+    theme: {
+        label: "Theme name",
+        value: "theme-name",
+    },
 } as IPhoneSettings;
 
 const theme = createTheme({
-  palette: {
-    mode: "light",
-  },
+    palette: {
+        mode: "light",
+    },
 });
 
 /*
@@ -67,22 +66,20 @@ const theme = createTheme({
  */
 
 const Root = () => {
-  return (
-    <HashRouter>
-      <RecoilRoot>
-        <React.Suspense fallback="Loading dev env">
-          <NuiProvider resource="npwd_qb_mail">
-            <Container>
-              <Background src={image} />
-              <AppContainer>
-                <App settings={settings} i18n={i18next} theme={theme} />
-              </AppContainer>
-            </Container>
-          </NuiProvider>
-        </React.Suspense>
-      </RecoilRoot>
-    </HashRouter>
-  );
+    return (
+        <HashRouter>
+            <RecoilRoot>
+                <React.Suspense fallback="Loading dev env">
+                    <Container>
+                        <Background src={image}/>
+                        <AppContainer>
+                            <App settings={settings} i18n={i18next} theme={theme}/>
+                        </AppContainer>
+                    </Container>
+                </React.Suspense>
+            </RecoilRoot>
+        </HashRouter>
+    );
 };
 
-ReactDOM.render(<Root />, document.getElementById("root"));
+ReactDOM.render(<Root/>, document.getElementById("root"));

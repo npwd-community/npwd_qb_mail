@@ -1633,11 +1633,6 @@ find-up@^5.0.0:
     locate-path "^6.0.0"
     path-exists "^4.0.0"
 
-fivem-nui-react-lib@^2.3.13:
-  version "2.3.13"
-  resolved "https://registry.yarnpkg.com/fivem-nui-react-lib/-/fivem-nui-react-lib-2.3.13.tgz#9aa39c8fc86a70d7ab10bb4c22301f9dad77c28d"
-  integrity sha512-+pkx6ZwHMaFIFiaa4Yq/8T8yjKzfGz1806kiYDN+Eapnw7eu8LjSNVAl4PVk5eJIIMxaf97TGbB3duUTB3GoNg==
-
 flat-cache@^3.0.4:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/flat-cache/-/flat-cache-3.0.4.tgz#61b0338302b2fe9f957dcc32fc2a87f1c3048b11"

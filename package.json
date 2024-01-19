@@ -40,7 +40,6 @@
     "esbuild": "^0.19.5",
     "eslint": "^8.10.0",
     "file-loader": "^6.2.0",
-    "fivem-nui-react-lib": "^2.3.13",
     "i18next": "^21.8.16",
     "prettier": "^2.5.1",
     "react": "^17.0.2",
